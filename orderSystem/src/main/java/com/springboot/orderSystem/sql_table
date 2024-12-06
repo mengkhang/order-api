@@ -1,0 +1,17 @@
+CREATE TABLE dbo.customer (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    name NVARCHAR(50) NOT NULL UNIQUE,
+    address NVARCHAR(255) NOT NULL
+);
+
+CREATE TABLE dbo.[order] (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    fk_customer_id INT NOT NULL,
+    name NVARCHAR(255) NOT NULL,
+    type NVARCHAR(255) NOT NULL,
+    price FLOAT NOT NULL,
+    qty INT NOT NULL,
+    total FLOAT NOT NULL,
+	status INT NOT NULL,
+    CONSTRAINT FK_Order_Customer FOREIGN KEY (fk_customer_id) REFERENCES dbo.customer (id) ON DELETE CASCADE
+);
